@@ -24,6 +24,12 @@ BUILD_ENV:=development
 
 ZIG_VERSION=0.12.0
 
+.PHONY: build clean run test
+
+# Build the library
+build:
+	zig build
+
 ###########################################################
 # Load external lib build tasks
 ###########################################################
@@ -32,10 +38,13 @@ include script/*.mk
 # Install dependencies
 dev-install: zig-install
 
-# Build the library
-build: zig-build
+# Build and run the example
+run: build
+	zig run examples/todo/main.zig
+
+test:
+	zig test ./examples/todo/main.zig
 
 clean:
-	rm -rf dist/*
-	rm -rf tmp
+	rm -rf tmp zig-cache zig-out; true
 

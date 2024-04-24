@@ -28,6 +28,9 @@ $(ZIG_BIN):
 
 zig-install: $(ZIG_BIN)
 
+zig-ctags:
+	ctags -R ./src ./lib/zig/lib
+
 zig-build:
 	$(ZIG_BIN) build
 
